@@ -1,0 +1,22 @@
+{
+  "name": "samsocials-desktop",
+  "version": "1.0.0",
+  "description": "SamSocials Desktop",
+  "main": "main.js",
+  "author": "SamSocials",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.samsocials.desktop",
+    "productName": "SamSocials",
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
