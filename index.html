@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SamSocials Desktop</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090a12;color:#f4f2ff;font-family:Segoe UI,Arial,sans-serif}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#10111d;border-right:1px solid #24243a;padding:25px 17px;flex-shrink:0}
+.logo{font-size:23px;font-weight:800;margin:0 0 35px 8px}
+.logo span{color:#a66bff}
+.nav{display:flex;align-items:center;gap:13px;padding:13px 14px;margin:5px 0;border-radius:12px;color:#aaa8c0;cursor:pointer}
+.nav:hover,.nav.active{background:#29203f;color:white}
+.profile-mini{margin-top:35px;padding:15px;background:#1a1929;border-radius:14px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#8e50ff,#4321a5);display:grid;place-items:center;font-weight:bold}
+.main{flex:1;min-width:0;padding:30px;max-width:1150px;margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+h1{font-size:27px;margin:0}
+.muted{color:#9693aa}
+.card{background:#121321;border:1px solid #25243a;border-radius:17px;padding:20px;margin-bottom:17px}
+.create{display:flex;gap:13px;align-items:center}
+input,textarea{background:#1c1b2c;border:1px solid #343149;color:white;border-radius:12px;padding:13px;font:inherit;outline:none}
+input:focus,textarea:focus{border-color:#985aff}
+.create input{flex:1;min-width:0}
+button{border:0;border-radius:11px;padding:11px 17px;background:#8147e8;color:white;font-weight:700;cursor:pointer}
+button:hover{background:#995fff}
+.post-head{display:flex;gap:12px;align-items:center}
+.post-head strong{display:block}
+.post-text{line-height:1.6;margin:17px 0}
+.post-actions{display:flex;gap:12px}
+.secondary{background:#242238;color:#ddd}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:#1b1930;border-radius:13px;padding:17px}
+.stat strong{font-size:23px;display:block;color:#bd94ff;margin-bottom:5px}
+.section{display:none}
+.section.active{display:block}
+.badge{display:inline-block;background:#33234e;color:#d3b4ff;padding:6px 10px;border-radius:20px;font-size:12px}
+.chat{display:flex;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid #29283a}
+.chat:last-child{border:0}
+textarea{width:100%;min-height:90px;resize:vertical;margin:15px 0}
+@media(max-width:700px){
+.sidebar{width:65px;padding:15px 7px}
+.logo{font-size:0;margin:10px 0 25px;text-align:center}
+.logo span{font-size:23px}
+.nav{justify-content:center;font-size:0;padding:14px 5px}
+.profile-mini{display:none}
+.main{padding:17px}
+.stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">Sam<span>Socials</span></div>
+  <div class="nav active" data-page="home">🏠 Лента</div>
+  <div class="nav" data-page="messages">💬 Сообщения</div>
+  <div class="nav" data-page="profile">👤 Профиль</div>
+  <div class="nav" data-page="levels">⭐ SamLevels</div>
+  <div class="nav" data-page="news">📰 Новости</div>
+  <div class="nav" data-page="settings">⚙️ Настройки</div>
+  <div class="profile-mini">
+    <div class="avatar">S</div>
+    <p><b>SamUser</b></p>
+    <span class="badge">Уровень 1</span>
+  </div>
+</aside>
+
+<main class="main">
+<section class="section active" id="home">
+  <div class="top">
+    <div><h1>Лента</h1><p class="muted">Добро пожаловать в SamSocials!</p></div>
+    <span class="badge">DESKTOP 2.0</span>
+  </div>
+  <div class="card create">
+    <div class="avatar">S</div>
+    <input id="postInput" placeholder="Что нового?">
+    <button onclick="addPost()">Опубликовать</button>
+  </div>
+  <div id="posts">
+    <article class="card">
+      <div class="post-head"><div class="avatar">S</div><div><strong>SamSocials</strong><span class="muted">Официальное сообщество</span></div></div>
+      <p class="post-text">🚀 Добро пожаловать в новое поколение SamSocials! Здесь начинается наше приключение.</p>
+      <div class="post-actions"><button class="secondary" onclick="like(this)">♡ 0</button><span class="muted">Первый пост</span></div>
+    </article>
+    <article class="card">
+      <div class="post-head"><div class="avatar">D</div><div><strong>Dors</strong><span class="muted">Участник</span></div></div>
+      <p class="post-text">🌌 Какой у вас любимый космический объект?</p>
+      <div class="post-actions"><button class="secondary" onclick="like(this)">♡ 0</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="messages">
+  <div class="top"><h1>Сообщения</h1></div>
+  <div class="card">
+    <div class="chat"><div class="avatar">S</div><div><b>SamSocials</b><p class="muted">Здесь будут ваши переписки.</p></div></div>
+    <p class="muted">Пока это демонстрационный раздел.</p>
+  </div>
+</section>
+
+<section class="section" id="profile">
+  <div class="top"><h1>Мой профиль</h1></div>
+  <div class="card">
+    <div class="avatar" style="width:75px;height:75px;font-size:25px">S</div>
+    <h2>SamUser</h2>
+    <p class="muted">Новый участник SamSocials</p>
+    <span class="badge">⭐ Уровень 1</span>
+  </div>
+</section>
+
+<section class="section" id="levels">
+  <div class="top"><h1>SamLevels ⭐</h1></div>
+  <div class="card">
+    <h2>Уровень 1</h2>
+    <p class="muted">Твой путь только начинается!</p>
+    <div style="height:12px;background:#29263d;border-radius:20px;overflow:hidden">
+      <div id="xpbar" style="width:0%;height:100%;background:linear-gradient(90deg,#7540df,#c084fc)"></div>
+    </div>
+    <p id="xptext" class="muted">0 / 100 XP</p>
+    <button onclick="earnXP()">Получить XP за активность</button>
+  </div>
+</section>
+
+<section class="section" id="news">
+  <div class="top"><h1>SamSocials News</h1></div>
+  <div class="card"><span class="badge">DESKTOP 2.0</span><h2>Новая версия!</h2><p class="muted">Начало разработки отдельного приложения SamSocials для Windows.</p></div>
+  <div class="card"><h2>Что дальше?</h2><p class="muted">Впереди чаты, профили, уведомления и новые возможности.</p></div>
+</section>
+
+<section class="section" id="settings">
+  <div class="top"><h1>Настройки</h1></div>
+  <div class="card"><h3>SamSocials Desktop</h3><p class="muted">Версия 1.0.0</p><p>Тема: тёмная</p><p>Интерфейс: русский</p></div>
+</section>
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.nav').forEach(item=>{
+ item.addEventListener('click',()=>{
+  document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  item.classList.add('active');
+  document.getElementById(item.dataset.page).classList.add('active');
+ });
+});
+
+function like(button){
+ let liked=button.dataset.liked==='yes';
+ let count=Number(button.textContent.replace(/[^0-9]/g,''))||0;
+ button.dataset.liked=liked?'no':'yes';
+ button.textContent=(liked?'♡ ':'♥ ')+(liked?Math.max(0,count-1):count+1);
+}
+
+function addPost(){
+ const input=document.getElementById('postInput');
+ const value=input.value.trim();
+ if(!value)return;
+ const post=document.createElement('article');
+ post.className='card';
+ const head=document.createElement('div');
+ head.className='post-head';
+ const avatar=document.createElement('div');
+ avatar.className='avatar';
+ avatar.textContent='S';
+ const name=document.createElement('div');
+ const strong=document.createElement('strong');
+ strong.textContent='SamUser';
+ const time=document.createElement('span');
+ time.className='muted';
+ time.textContent='Только что';
+ name.append(strong,time);
+ head.append(avatar,name);
+ const text=document.createElement('p');
+ text.className='post-text';
+ text.textContent=value;
+ const actions=document.createElement('div');
+ actions.className='post-actions';
+ const btn=document.createElement('button');
+ btn.className='secondary';
+ btn.textContent='♡ 0';
+ btn.onclick=()=>like(btn);
+ actions.append(btn);
+ post.append(head,text,actions);
+ document.getElementById('posts').prepend(post);
+ input.value='';
+}
+
+let xp=0;
+function earnXP(){
+ xp=Math.min(100,xp+10);
+ document.getElementById('xpbar').style.width=xp+'%';
+ document.getElementById('xptext').textContent=xp+' / 100 XP';
+}
+</script>
+</body>
+</html>
