@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -6,49 +6,47 @@
 <title>SamSocials Desktop</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090a12;color:#f4f2ff;font-family:Segoe UI,Arial,sans-serif}
+:root{--bg:#090a12;--side:#10111d;--card:#121321;--border:#25243a;--text:#f4f2ff;--muted:#9693aa;--input:#1c1b2c;--accent:#8147e8;--accent2:#995fff}
+body.light{--bg:#f2f0fa;--side:#fff;--card:#fff;--border:#ded9ec;--text:#211b30;--muted:#716b80;--input:#f2eff9;--accent:#7540d9;--accent2:#8952e8}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}
 .app{display:flex;min-height:100vh}
-.sidebar{width:245px;background:#10111d;border-right:1px solid #24243a;padding:25px 17px;flex-shrink:0}
-.logo{font-size:23px;font-weight:800;margin:0 0 35px 8px}
-.logo span{color:#a66bff}
-.nav{display:flex;align-items:center;gap:13px;padding:13px 14px;margin:5px 0;border-radius:12px;color:#aaa8c0;cursor:pointer}
+.sidebar{width:245px;background:var(--side);border-right:1px solid var(--border);padding:25px 17px;flex-shrink:0}
+.logo{font-size:23px;font-weight:800;margin:0 0 35px 8px}.logo span{color:#a66bff}
+.nav{display:flex;align-items:center;gap:13px;padding:13px 14px;margin:5px 0;border-radius:12px;color:var(--muted);cursor:pointer}
 .nav:hover,.nav.active{background:#29203f;color:white}
-.profile-mini{margin-top:35px;padding:15px;background:#1a1929;border-radius:14px}
-.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#8e50ff,#4321a5);display:grid;place-items:center;font-weight:bold}
+.profile-mini{margin-top:35px;padding:15px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#8e50ff,#4321a5);display:grid;place-items:center;font-weight:bold;overflow:hidden;flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover}
 .main{flex:1;min-width:0;padding:30px;max-width:1150px;margin:auto}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
-h1{font-size:27px;margin:0}
-.muted{color:#9693aa}
-.card{background:#121321;border:1px solid #25243a;border-radius:17px;padding:20px;margin-bottom:17px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:12px}
+h1{font-size:27px;margin:0}.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:20px;margin-bottom:17px}
 .create{display:flex;gap:13px;align-items:center}
-input,textarea{background:#1c1b2c;border:1px solid #343149;color:white;border-radius:12px;padding:13px;font:inherit;outline:none}
-input:focus,textarea:focus{border-color:#985aff}
+input,textarea,select{background:var(--input);border:1px solid #343149;color:var(--text);border-radius:12px;padding:13px;font:inherit;outline:none}
+input:focus,textarea:focus,select:focus{border-color:#985aff}
 .create input{flex:1;min-width:0}
-button{border:0;border-radius:11px;padding:11px 17px;background:#8147e8;color:white;font-weight:700;cursor:pointer}
-button:hover{background:#995fff}
-.post-head{display:flex;gap:12px;align-items:center}
-.post-head strong{display:block}
-.post-text{line-height:1.6;margin:17px 0}
-.post-actions{display:flex;gap:12px}
+button{border:0;border-radius:11px;padding:11px 17px;background:var(--accent);color:white;font-weight:700;cursor:pointer}
+button:hover{background:var(--accent2)}button:disabled{opacity:.5;cursor:not-allowed}
+.post-head{display:flex;gap:12px;align-items:center}.post-head strong{display:block}
+.post-text{line-height:1.6;margin:17px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.post-actions{display:flex;gap:12px;align-items:center}
 .secondary{background:#242238;color:#ddd}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.stat{background:#1b1930;border-radius:13px;padding:17px}
+.stat{background:var(--input);border-radius:13px;padding:17px}
 .stat strong{font-size:23px;display:block;color:#bd94ff;margin-bottom:5px}
-.section{display:none}
-.section.active{display:block}
+.section{display:none}.section.active{display:block}
 .badge{display:inline-block;background:#33234e;color:#d3b4ff;padding:6px 10px;border-radius:20px;font-size:12px}
-.chat{display:flex;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid #29283a}
+.chat{display:flex;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid var(--border)}
 .chat:last-child{border:0}
-textarea{width:100%;min-height:90px;resize:vertical;margin:15px 0}
-@media(max-width:700px){
-.sidebar{width:65px;padding:15px 7px}
-.logo{font-size:0;margin:10px 0 25px;text-align:center}
-.logo span{font-size:23px}
-.nav{justify-content:center;font-size:0;padding:14px 5px}
-.profile-mini{display:none}
-.main{padding:17px}
-.stats{grid-template-columns:1fr}
-}
+textarea{width:100%;min-height:90px;resize:vertical;margin:8px 0 15px}
+.field{display:grid;gap:8px;margin:15px 0}.field input{width:100%}
+.profile-cover{height:105px;border-radius:14px;background:linear-gradient(115deg,#39206a,#8147e8,#302050);margin-bottom:-40px}
+.profile-large{width:86px;height:86px;border:4px solid var(--card);font-size:25px;position:relative;margin-left:18px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hint{font-size:13px;color:var(--muted);line-height:1.5}
+hr{border:0;border-top:1px solid var(--border);margin:20px 0}
+#toast{position:fixed;bottom:20px;right:20px;background:#242238;color:white;padding:12px 17px;border-radius:12px;display:none;z-index:5;box-shadow:0 8px 30px #0005}
+@media(max-width:700px){.sidebar{width:65px;padding:15px 7px}.logo{font-size:0;margin:10px 0 25px;text-align:center}.logo span{font-size:23px}.nav{justify-content:center;font-size:0;padding:14px 5px}.profile-mini{display:none}.main{padding:17px}.stats{grid-template-columns:1fr}.create{flex-wrap:wrap}.create input{width:100%;flex-basis:60%}}
 </style>
 </head>
 <body>
@@ -62,138 +60,117 @@ textarea{width:100%;min-height:90px;resize:vertical;margin:15px 0}
   <div class="nav" data-page="news">📰 Новости</div>
   <div class="nav" data-page="settings">⚙️ Настройки</div>
   <div class="profile-mini">
-    <div class="avatar">S</div>
-    <p><b>SamUser</b></p>
-    <span class="badge">Уровень 1</span>
+    <div class="row"><div class="avatar" id="miniAvatar">S</div><b id="miniName">SamUser</b></div>
+    <p><span class="badge" id="miniLevel">Уровень 1</span></p>
   </div>
 </aside>
-
 <main class="main">
 <section class="section active" id="home">
-  <div class="top">
-    <div><h1>Лента</h1><p class="muted">Добро пожаловать в SamSocials!</p></div>
-    <span class="badge">DESKTOP 2.0</span>
-  </div>
-  <div class="card create">
-    <div class="avatar">S</div>
-    <input id="postInput" placeholder="Что нового?">
-    <button onclick="addPost()">Опубликовать</button>
-  </div>
-  <div id="posts">
-    <article class="card">
-      <div class="post-head"><div class="avatar">S</div><div><strong>SamSocials</strong><span class="muted">Официальное сообщество</span></div></div>
-      <p class="post-text">🚀 Добро пожаловать в новое поколение SamSocials! Здесь начинается наше приключение.</p>
-      <div class="post-actions"><button class="secondary" onclick="like(this)">♡ 0</button><span class="muted">Первый пост</span></div>
-    </article>
-    <article class="card">
-      <div class="post-head"><div class="avatar">D</div><div><strong>Dors</strong><span class="muted">Участник</span></div></div>
-      <p class="post-text">🌌 Какой у вас любимый космический объект?</p>
-      <div class="post-actions"><button class="secondary" onclick="like(this)">♡ 0</button></div>
-    </article>
-  </div>
+  <div class="top"><div><h1>Лента</h1><p class="muted">Добро пожаловать в SamSocials!</p></div><span class="badge">DESKTOP 2.1</span></div>
+  <div class="card create"><div class="avatar" id="composerAvatar">S</div><input id="postInput" placeholder="Что нового?" maxlength="1000"><button onclick="addPost()">Опубликовать</button></div>
+  <div id="posts"></div>
 </section>
-
 <section class="section" id="messages">
   <div class="top"><h1>Сообщения</h1></div>
-  <div class="card">
-    <div class="chat"><div class="avatar">S</div><div><b>SamSocials</b><p class="muted">Здесь будут ваши переписки.</p></div></div>
-    <p class="muted">Пока это демонстрационный раздел.</p>
-  </div>
+  <div class="card"><div class="chat"><div class="avatar">S</div><div><b>SamSocials</b><p class="muted">Системные сообщения</p></div></div><p class="muted">Личные переписки пока не подключены. Для настоящих чатов понадобится сервер и аккаунты пользователей.</p></div>
 </section>
-
 <section class="section" id="profile">
-  <div class="top"><h1>Мой профиль</h1></div>
+  <div class="top"><h1>Мой профиль</h1><button onclick="showPage('settings')">Изменить профиль</button></div>
   <div class="card">
-    <div class="avatar" style="width:75px;height:75px;font-size:25px">S</div>
-    <h2>SamUser</h2>
-    <p class="muted">Новый участник SamSocials</p>
-    <span class="badge">⭐ Уровень 1</span>
+    <div class="profile-cover"></div>
+    <div class="avatar profile-large" id="profileAvatar">S</div>
+    <div style="padding:12px 5px 2px"><h2 id="profileName">SamUser</h2><p class="muted" id="profileHandle">@samuser</p><p id="profileBio">Новый участник SamSocials</p><span class="badge" id="profileLevel">⭐ Уровень 1</span></div>
   </div>
+  <div class="card"><h3>Статистика</h3><div class="stats"><div class="stat"><strong id="postCount">0</strong><span class="muted">Публикаций</span></div><div class="stat"><strong id="xpCount">0</strong><span class="muted">XP</span></div><div class="stat"><strong id="likeCount">0</strong><span class="muted">Лайков поставлено</span></div></div></div>
 </section>
-
 <section class="section" id="levels">
   <div class="top"><h1>SamLevels ⭐</h1></div>
-  <div class="card">
-    <h2>Уровень 1</h2>
-    <p class="muted">Твой путь только начинается!</p>
-    <div style="height:12px;background:#29263d;border-radius:20px;overflow:hidden">
-      <div id="xpbar" style="width:0%;height:100%;background:linear-gradient(90deg,#7540df,#c084fc)"></div>
-    </div>
-    <p id="xptext" class="muted">0 / 100 XP</p>
-    <button onclick="earnXP()">Получить XP за активность</button>
-  </div>
+  <div class="card"><h2 id="levelTitle">Уровень 1</h2><p class="muted">Получай опыт за активность в приложении.</p><div style="height:12px;background:#29263d;border-radius:20px;overflow:hidden"><div id="xpbar" style="width:0%;height:100%;background:linear-gradient(90deg,#7540df,#c084fc)"></div></div><p id="xptext" class="muted">0 / 100 XP</p><button onclick="earnXP()">Получить XP за активность</button><p class="hint">Демо-опыт хранится только на этом компьютере.</p></div>
 </section>
-
 <section class="section" id="news">
   <div class="top"><h1>SamSocials News</h1></div>
-  <div class="card"><span class="badge">DESKTOP 2.0</span><h2>Новая версия!</h2><p class="muted">Начало разработки отдельного приложения SamSocials для Windows.</p></div>
-  <div class="card"><h2>Что дальше?</h2><p class="muted">Впереди чаты, профили, уведомления и новые возможности.</p></div>
+  <div class="card"><span class="badge">DESKTOP 2.1</span><h2>Обновление интерфейса</h2><p class="muted">Добавлены редактирование профиля, сохранение данных и настройки темы.</p></div>
+  <div class="card"><h2>Что дальше?</h2><p class="muted">Впереди подключение настоящих аккаунтов, серверной ленты и личных сообщений.</p></div>
 </section>
-
 <section class="section" id="settings">
   <div class="top"><h1>Настройки</h1></div>
-  <div class="card"><h3>SamSocials Desktop</h3><p class="muted">Версия 1.0.0</p><p>Тема: тёмная</p><p>Интерфейс: русский</p></div>
+  <div class="card">
+    <h2>Профиль</h2>
+    <div class="field"><label for="nameInput">Имя пользователя</label><input id="nameInput" maxlength="24" placeholder="Например, SamUser"></div>
+    <div class="field"><label for="handleInput">Ник (без @)</label><input id="handleInput" maxlength="24" placeholder="samuser"></div>
+    <div class="field"><label for="bioInput">О себе</label><textarea id="bioInput" maxlength="180" placeholder="Расскажи немного о себе"></textarea></div>
+    <div class="field"><label for="avatarInput">Ссылка на аватар (необязательно)</label><input id="avatarInput" type="url" placeholder="https://..."></div>
+    <p class="hint">Используй ссылку на изображение, которому доверяешь. Можно оставить поле пустым.</p>
+    <button onclick="saveProfile()">Сохранить профиль</button>
+    <hr>
+    <h2>Внешний вид</h2>
+    <div class="field"><label for="themeSelect">Тема приложения</label><select id="themeSelect" onchange="setTheme(this.value)"><option value="dark">Тёмная</option><option value="light">Светлая</option></select></div>
+    <hr>
+    <h2>Уведомления</h2>
+    <label class="row"><input id="notifyToggle" type="checkbox" style="width:18px;height:18px" onchange="saveSettings()"> Показывать уведомления внутри приложения</label>
+    <p class="hint">Настройки и профиль сохраняются локально на этом компьютере. Это пока не синхронизация между пользователями.</p>
+  </div>
+  <div class="card"><h3>SamSocials Desktop</h3><p class="muted">Версия 2.1.0</p><button class="secondary" onclick="resetDemo()">Сбросить локальные данные</button></div>
 </section>
 </main>
 </div>
-
+<div id="toast"></div>
 <script>
-document.querySelectorAll('.nav').forEach(item=>{
- item.addEventListener('click',()=>{
-  document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  item.classList.add('active');
-  document.getElementById(item.dataset.page).classList.add('active');
- });
-});
-
-function like(button){
- let liked=button.dataset.liked==='yes';
- let count=Number(button.textContent.replace(/[^0-9]/g,''))||0;
- button.dataset.liked=liked?'no':'yes';
- button.textContent=(liked?'♡ ':'♥ ')+(liked?Math.max(0,count-1):count+1);
+const defaults={name:'SamUser',handle:'samuser',bio:'Новый участник SamSocials',avatar:'',theme:'dark',notifications:true,xp:0,likes:0,posts:[]};
+let data={...defaults};
+try{const saved=JSON.parse(localStorage.getItem('samsocialsData')||'{}');data={...defaults,...saved};if(!Array.isArray(data.posts))data.posts=[];}catch(e){}
+function persist(){localStorage.setItem('samsocialsData',JSON.stringify(data));}
+function toast(message){const el=document.getElementById('toast');el.textContent=message;el.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display='none',2300);}
+function initials(name){return (name.trim()[0]||'S').toUpperCase();}
+function avatarContent(el){el.innerHTML='';if(data.avatar){const img=document.createElement('img');img.src=data.avatar;img.alt='Аватар';img.onerror=()=>{el.textContent=initials(data.name)};el.append(img);}else el.textContent=initials(data.name);}
+function showPage(page){document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.page===page));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===page));if(page==='profile')renderProfile();}
+document.querySelectorAll('.nav').forEach(item=>item.addEventListener('click',()=>showPage(item.dataset.page)));
+function saveProfile(){
+ const name=document.getElementById('nameInput').value.trim(),handle=document.getElementById('handleInput').value.trim().replace(/^@/,'').replace(/[^a-zA-Z0-9_]/g,''),bio=document.getElementById('bioInput').value.trim(),avatar=document.getElementById('avatarInput').value.trim();
+ if(!name||!handle){toast('Заполни имя и ник');return;}
+ if(avatar&&!/^https?:\/\//i.test(avatar)){toast('Ссылка на аватар должна начинаться с http:// или https://');return;}
+ data.name=name;data.handle=handle;data.bio=bio;data.avatar=avatar;persist();renderAll();toast('Профиль сохранён!');
 }
-
+function setTheme(theme){data.theme=theme;document.body.classList.toggle('light',theme==='light');persist();}
+function saveSettings(){data.notifications=document.getElementById('notifyToggle').checked;persist();toast('Настройки сохранены');}
+function earnXP(){data.xp+=10;persist();renderAll();toast('+10 XP!');}
+function like(btn){const was=btn.dataset.liked==='yes';btn.dataset.liked=was?'no':'yes';let count=Number(btn.dataset.count||0)+(was?-1:1);btn.dataset.count=count;btn.textContent=(was?'♡ ':'♥ ')+count;if(!was)data.likes++;else data.likes=Math.max(0,data.likes-1);persist();renderProfile();}
 function addPost(){
- const input=document.getElementById('postInput');
- const value=input.value.trim();
- if(!value)return;
- const post=document.createElement('article');
- post.className='card';
- const head=document.createElement('div');
- head.className='post-head';
- const avatar=document.createElement('div');
- avatar.className='avatar';
- avatar.textContent='S';
- const name=document.createElement('div');
- const strong=document.createElement('strong');
- strong.textContent='SamUser';
- const time=document.createElement('span');
- time.className='muted';
- time.textContent='Только что';
- name.append(strong,time);
- head.append(avatar,name);
- const text=document.createElement('p');
- text.className='post-text';
- text.textContent=value;
- const actions=document.createElement('div');
- actions.className='post-actions';
- const btn=document.createElement('button');
- btn.className='secondary';
- btn.textContent='♡ 0';
- btn.onclick=()=>like(btn);
- actions.append(btn);
- post.append(head,text,actions);
- document.getElementById('posts').prepend(post);
- input.value='';
+ const input=document.getElementById('postInput'),value=input.value.trim();if(!value)return;
+ data.posts.unshift({id:Date.now(),text:value,created:'Только что',likes:0});input.value='';persist();renderPosts();renderProfile();toast('Публикация добавлена');
 }
-
-let xp=0;
-function earnXP(){
- xp=Math.min(100,xp+10);
- document.getElementById('xpbar').style.width=xp+'%';
- document.getElementById('xptext').textContent=xp+' / 100 XP';
+function renderPosts(){
+ const root=document.getElementById('posts');root.innerHTML='';
+ const initial=[{id:'welcome',name:'SamSocials',sub:'Официальное сообщество',text:'🚀 Добро пожаловать в новое поколение SamSocials! Здесь начинается наше приключение.',likes:0},{id:'dors',name:'Dors',sub:'Участник',text:'🌌 Какой у вас любимый космический объект?',likes:0}];
+ [...data.posts.map(p=>({...p,name:data.name,sub:'@'+data.handle})),...initial].forEach(p=>{
+  const article=document.createElement('article');article.className='card';
+  const head=document.createElement('div');head.className='post-head';
+  const av=document.createElement('div');av.className='avatar';av.textContent=initials(p.name);
+  const who=document.createElement('div');const strong=document.createElement('strong');strong.textContent=p.name;const sub=document.createElement('span');sub.className='muted';sub.textContent=p.sub||p.created||'';who.append(strong,sub);head.append(av,who);
+  const text=document.createElement('p');text.className='post-text';text.textContent=p.text;
+  const actions=document.createElement('div');actions.className='post-actions';const btn=document.createElement('button');btn.className='secondary';btn.textContent='♡ '+(p.likes||0);btn.dataset.count=p.likes||0;btn.onclick=()=>like(btn);actions.append(btn);
+  article.append(head,text,actions);root.append(article);
+ });
 }
+function renderProfile(){
+ document.getElementById('profileName').textContent=data.name;document.getElementById('profileHandle').textContent='@'+data.handle;document.getElementById('profileBio').textContent=data.bio||'Пока ничего не рассказано';document.getElementById('profileLevel').textContent='⭐ Уровень '+(Math.floor(data.xp/100)+1);
+ document.getElementById('postCount').textContent=data.posts.length;document.getElementById('xpCount').textContent=data.xp;document.getElementById('likeCount').textContent=data.likes;
+}
+function renderAll(){
+ ['miniAvatar','composerAvatar','profileAvatar'].forEach(id=>avatarContent(document.getElementById(id)));
+ document.getElementById('miniName').textContent=data.name;document.getElementById('miniLevel').textContent='Уровень '+(Math.floor(data.xp/100)+1);
+ document.getElementById('levelTitle').textContent='Уровень '+(Math.floor(data.xp/100)+1);
+ const progress=data.xp%100;document.getElementById('xpbar').style.width=progress+'%';document.getElementById('xptext').textContent=progress+' / 100 XP до следующего уровня';
+ document.getElementById('nameInput').value=data.name;document.getElementById('handleInput').value=data.handle;document.getElementById('bioInput').value=data.bio;document.getElementById('avatarInput').value=data.avatar;
+ document.getElementById('themeSelect').value=data.theme;document.getElementById('notifyToggle').checked=data.notifications;
+ document.body.classList.toggle('light',data.theme==='light');renderProfile();renderPosts();
+}
+function resetDemo(){if(!confirm('Сбросить профиль, публикации и настройки на этом компьютере?'))return;data={...defaults,posts:[]};persist();renderAll();toast('Локальные данные сброшены');}
+renderAll();
 </script>
 </body>
-</html>
+</html>'''
+path = "/mnt/data/SamSocials-Desktop-2.1.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html)
+print(path)
